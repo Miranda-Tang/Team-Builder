@@ -171,13 +171,60 @@ ul#member_list li {
     object-fit: cover;
 }
 
+#about_container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
+    flex-grow: 1;
+}
+
+#introduction_container {
+    display: flex;
+    background-color: #E4E4E4;
+    border-radius: 15px;
+    justify-content: space-between;
+    padding: var(--main-padding);
+    margin: var(--main-padding);
+    height: 200px;
+}
+
+#introduction_text {
+    margin-right: var(--main-padding);
+}
+
+#contacts {
+    display: flex;
+    gap: 20px;
+}
+
+#contacts a {
+    color: var(--button-bg-color);
+    font-size: 24px;
+    text-decoration: none;
+}
+
+#course_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#course_link .fa {
+    color: var(--button-bg-color);
+    font-weight: bold;
+    font-size: 24px;
+}
+
 @media (max-width: 768px) {
 
     body {
         font-size: 18px;
     }
 
-    #main_container {
+    #main_container, #about_container {
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -190,15 +237,14 @@ ul#member_list li {
         padding: var(--mobile-padding);
     }
 
-    ul#member_list li {
+    ul#member_list li, #introduction_container {
         flex-direction: column;
         height: auto;
     }
 
-    .member-image,
-    .member-details {
-        flex: none;
-        width: 100%;
+    #introduction_text {
+        margin-right: 0;
+        margin-bottom: var(--main-padding);
     }
 
     .member-image img {
