@@ -1,10 +1,11 @@
 let members = JSON.parse(`[
-  {
+{
+    "id": ${Date.now()},
     "name": "Miranda T.",
     "description": "Scrooge McDuck's hardcore fan\\nLucky Dime enthusiast",
     "age": 25,
     "image": "https://avatars.githubusercontent.com/u/81618041?v=4"
-  }
+}
 ]`);
 
 renderMembers();
@@ -15,7 +16,19 @@ function addMember() {
     let memberAgeInput = document.getElementById("member_age");
     let memberImageInput = document.getElementById("member_image");
 
+    let errorMessageDiv = document.getElementById('form_error_message');
+
+    if (!memberNameInput.value || !memberDescriptionInput.value || !memberAgeInput.value || !memberImageInput.value) {
+        // Show the error message if any field is empty
+        errorMessageDiv.style.visibility = 'visible';
+        // Stop the function if form is invalid
+        return false;
+    } else {
+        errorMessageDiv.style.visibility = 'hidden'; // Hide the error message; the error message div will still take up space
+    }
+
     let newMember = {
+        id: Date.now(),
         name: memberNameInput.value,
         description: memberDescriptionInput.value,
         age: memberAgeInput.value,
@@ -37,6 +50,9 @@ function clearForm() {
     document.getElementById("member_description").value = "";
     document.getElementById("member_age").value = "";
     document.getElementById("member_image").value = "";
+
+    let errorMessageDiv = document.getElementById('form_error_message');
+    errorMessageDiv.style.visibility = 'hidden';
 }
 
 function renderMembers() {
@@ -69,8 +85,12 @@ function renderMembers() {
         );
 
         let deleteButton = memberLi.querySelector(".delete-button");
+        deleteButton.dataset.id = members[i].id;
         deleteButton.addEventListener("click", function () {
+            let id = parseInt(this.dataset.id);
+            members = members.filter(member => member.id !== id);
             memberList.removeChild(memberLi);
+            console.log(members);
         });
     }
 }
