@@ -208,13 +208,13 @@ ul#member_list li {
     gap: 20px;
 }
 
-#contacts a {
+#contacts a, #course_link {
     color: var(--button-bg-color);
     font-size: 24px;
     text-decoration: none;
 }
 
-#contacts a:hover {
+#contacts a:hover, #course_link:hover {
     color: #005880;
 }
 
@@ -224,17 +224,6 @@ ul#member_list li {
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-#course_link {
-    color: var(--button-bg-color);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-#course_link:hover {
-    color: #005880;
 }
 
 @media (max-width: 768px) {
