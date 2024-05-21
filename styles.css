@@ -214,6 +214,10 @@ ul#member_list li {
     text-decoration: none;
 }
 
+#contacts a:hover {
+    color: #005880;
+}
+
 #course_container {
     display: flex;
     flex-direction: column;
@@ -222,10 +226,15 @@ ul#member_list li {
     text-align: center;
 }
 
-#course_link .fa {
+#course_link {
     color: var(--button-bg-color);
+    text-decoration: none;
     font-weight: bold;
     font-size: 24px;
+}
+
+#course_link:hover {
+    color: #005880;
 }
 
 @media (max-width: 768px) {
