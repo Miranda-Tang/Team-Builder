@@ -90,7 +90,7 @@ function renderMembers() {
             let id = parseInt(this.dataset.id);
             members = members.filter(member => member.id !== id);
             memberList.removeChild(memberLi);
-            console.log(members);
+            // console.log(members);
         });
     }
 }
