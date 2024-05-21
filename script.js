@@ -1,10 +1,11 @@
 let members = JSON.parse(`[
-  {
+{
+    "id": ${Date.now()},
     "name": "Miranda T.",
     "description": "Scrooge McDuck's hardcore fan\\nLucky Dime enthusiast",
     "age": 25,
     "image": "https://avatars.githubusercontent.com/u/81618041?v=4"
-  }
+}
 ]`);
 
 renderMembers();
@@ -84,10 +85,11 @@ function renderMembers() {
         );
 
         let deleteButton = memberLi.querySelector(".delete-button");
+        deleteButton.dataset.id = members[i].id;
         deleteButton.addEventListener("click", function () {
+            let id = parseInt(this.dataset.id);
+            members = members.filter(member => member.id !== id);
             memberList.removeChild(memberLi);
-            // Find member by ID and remove it from members array
-            members = members.filter(member => member.id !== members[i].id);
             console.log(members);
         });
     }
