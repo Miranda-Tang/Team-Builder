@@ -30,7 +30,7 @@ header {
     padding: var(--main-padding);
     text-align: center;
     border-bottom: 5px solid var(--button-bg-color);
-    font-size: x-large;
+    font-size: large;
     font-weight: bold;
     font-family: var(--header-font), sans-serif;
 }
