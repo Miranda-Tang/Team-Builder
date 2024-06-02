@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
-import { remove } from "./membersSlice.js";
+import { remove, select } from "./membersSlice.js";
 import { useState } from "react";
 import Modal from "./Modal.jsx";
+import Details from "./Details.jsx";
 
 const MemberCard = ({ member }) => {
   const dispatch = useDispatch();
@@ -10,16 +11,11 @@ const MemberCard = ({ member }) => {
   return (
     <li>
       <div className="member-image">
-        <img
-          src={member.image}
-          alt={member.name}
-          onClick={() => setShowModal(true)}
-        />
+        <img src={member.image} alt={member.name} />
       </div>
       <div className="member-info">
-        <div className="member-name">
-          <h2>{member.name}</h2>
-        </div>
+        <h2 className="member-name">{member.name}</h2>
+        <button onClick={() => setShowModal(true)}>See Details</button>
       </div>
       <button
         className="delete-button"
@@ -29,11 +25,18 @@ const MemberCard = ({ member }) => {
       </button>
       {showModal ? (
         <Modal>
-          <div>
-            <div className="buttons">
-              <button>Yes</button>
-              <button onClick={() => setShowModal(false)}>No</button>
-            </div>
+          <Details member={member} />
+          <div id="button-container">
+            <button
+              onClick={() => {
+                dispatch(select(member.id));
+                setShowModal(false);
+              }}
+              disabled={member.isSelected}
+            >
+              Select
+            </button>
+            <button onClick={() => setShowModal(false)}>Close</button>
           </div>
         </Modal>
       ) : null}

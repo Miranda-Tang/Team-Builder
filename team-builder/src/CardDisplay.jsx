@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import MemberCard from "./MemberCard.jsx";
 import { removeAll } from "./membersSlice.js";
+import SelectedMembers from "./SelectedMembers.jsx";
 
 const CardDisplay = () => {
   const members = useSelector((state) => state.members);
@@ -8,7 +9,8 @@ const CardDisplay = () => {
 
   return (
     <div id="card_display">
-      <div id="delete-button-container">
+      <div id="top-bar">
+        <SelectedMembers />
         <button
           id="delete_all_members"
           type="button"

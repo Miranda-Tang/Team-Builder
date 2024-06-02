@@ -50,19 +50,20 @@ const MemberForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const clearForm = () => {
+    setFormData(initialFormData);
+  };
+  
   const addMember = (e) => {
     e.preventDefault();
     const newMember = {
       id: Date.now(),
+      isSelected: false,
       ...formData,
     };
 
     dispatch(add(newMember));
     clearForm();
-  };
-
-  const clearForm = () => {
-    setFormData(initialFormData);
   };
 
   return (
