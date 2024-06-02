@@ -1,16 +1,17 @@
-import { BrowserRouter } from "react-router-dom";
-import Home from "./Home.jsx";
 import { Provider } from "react-redux";
 import store from "./store";
+import MemberForm from "./MemberForm.jsx";
+import CardDisplay from "./CardDisplay.jsx";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <header>Miranda&apos;s Team Builder</header>
-        <Home />
-      </Provider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <header>Miranda&apos;s Team Builder</header>
+      <div id="main_container">
+        <MemberForm />
+        <CardDisplay />
+      </div>
+    </Provider>
   );
 }
 

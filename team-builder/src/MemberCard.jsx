@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { remove, select } from "./membersSlice.js";
+import { remove, toggleSelect } from "./membersSlice.js";
 import { useState } from "react";
 import Modal from "./Modal.jsx";
 import Details from "./Details.jsx";
@@ -29,7 +29,7 @@ const MemberCard = ({ member }) => {
           <div id="button-container">
             <button
               onClick={() => {
-                dispatch(select(member.id));
+                dispatch(toggleSelect(member.id));
                 setShowModal(false);
               }}
               disabled={member.isSelected}

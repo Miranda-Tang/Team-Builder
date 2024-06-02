@@ -1,3 +1,6 @@
+// Reference: COMPLETE INTRO TO REACT V8
+// https://react-v8.holt.courses/lessons/special-case-react-tools/portals-and-refs
+
 import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 

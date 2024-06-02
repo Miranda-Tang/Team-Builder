@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { select } from "./membersSlice.js";
+import { toggleSelect } from "./membersSlice.js";
 
 const SelectedMembers = () => {
   const selectedMembers = useSelector((state) => state.members).filter(
@@ -18,7 +18,7 @@ const SelectedMembers = () => {
           />
           <button
             className="deselect-member-button"
-            onClick={() => dispatch(select(member.id))}
+            onClick={() => dispatch(toggleSelect(member.id))}
           >
             X
           </button>
