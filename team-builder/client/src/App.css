@@ -184,6 +184,47 @@ button[disabled] {
     opacity: 1;
 }
 
+.right-aligned-components {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.autocomplete-dropdown-container {
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    left: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 5;
+}
+
+.suggestion-button {
+    background-color: white;
+    color: var(--button-bg-color);
+    border: 1px solid var(--button-bg-color);
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+    margin: 0
+}
+
+.suggestion-button:hover {
+    background-color: #f1f1f1;
+}
+
 .delete-button {
     background: transparent;
     border: 1px solid var(--button-bg-color);
@@ -264,12 +305,52 @@ ul#member_list li {
 
 #modal > div {
     overflow-y: auto;
-    height: 250px;
+    height: 300px;
     width: 400px;
     padding: 15px;
     text-align: center;
     border-radius: 30px;
     background: #E4E4E4;
+}
+
+.description-input {
+    margin-top: 10px;
+    height: 60px;
+}
+
+.age-input-container {
+    display: flex;
+    width: 100%;
+    max-width: 150px;
+    margin: 15px auto 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.age-input {
+    width: 80px;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+}
+
+@keyframes saving {
+    0% {
+        transform: scale(1);
+        background-color: var(--dark-bg-color);
+        color: white;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.save-changes-button.saving {
+    animation: saving 1s ease;
 }
 
 #avatar {
@@ -377,7 +458,6 @@ ul#member_list li {
     form,
     input,
     textarea {
-        margin: var(--mobile-padding);
         padding: var(--mobile-padding);
     }
 

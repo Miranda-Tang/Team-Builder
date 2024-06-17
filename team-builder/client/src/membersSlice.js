@@ -1,55 +1,184 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-  {
-    id: 1,
-    isSelected: false,
-    name: "$crooge",
-    description: "Lucky Dime enthusiast",
-    age: 75,
-    image:
-      "https://ih1.redbubble.net/image.2110784518.0513/pp,840x830-pad,1000x1000,f8f8f8.jpg",
+const MEMBERS_URL = "http://localhost:3000/api/members";
+
+export const fetchMembersAsync = createAsyncThunk(
+  "members/fetchMembersAsync",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(MEMBERS_URL);
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   },
-  {
-    id: 2,
-    isSelected: false,
-    name: "Gladstone",
-    description: "The luckiest duck in the world",
-    age: 27,
-    image:
-      "https://p8.itc.cn/q_70/images03/20200703/682da6af38d44dd8a988001ba1b6397c.jpeg",
+);
+
+export const addMemberAsync = createAsyncThunk(
+  "members/addMemberAsync",
+  async (member, { rejectWithValue }) => {
+    try {
+      const response = await fetch(MEMBERS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(member),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   },
-  {
-    id: 3,
-    isSelected: false,
-    name: "Gyro",
-    description: "A brilliant yet absent-minded scientist",
-    age: 31,
-    image:
-      "https://i.pinimg.com/originals/94/a2/41/94a241f3fc27139cd0357e57a7402d05.jpg",
+);
+
+export const deleteAllMembersAsync = createAsyncThunk(
+  "members/deleteAllMembersAsync",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(MEMBERS_URL, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   },
-];
+);
+
+export const deleteMemberAsync = createAsyncThunk(
+  "members/deleteMemberAsync",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${MEMBERS_URL}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const updateMemberAsync = createAsyncThunk(
+  "members/updateMemberAsync",
+  async ({ id, updates }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${MEMBERS_URL}/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updates),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
 const membersSlice = createSlice({
   name: "members",
-  initialState, // object property value shorthand
-  reducers: {
-    add: function (state, action) {
-      state.push(action.payload);
-    },
-    remove: function (state, action) {
-      return state.filter((member) => member.id !== action.payload);
-    },
-    removeAll: function () {
-      return [];
-    },
-    toggleSelect: function (state, action) {
-      const member = state.find((member) => member.id === action.payload);
-      member.isSelected = !member.isSelected;
-    },
+  initialState: {
+    membersList: [],
+    statusFetch: "idle",
+    statusAdd: "idle",
+    statusDelete: "idle",
+    statusUpdate: "idle",
+    error: null,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchMembersAsync.pending, (state) => {
+        state.statusFetch = "loading";
+        state.error = null;
+      })
+      .addCase(fetchMembersAsync.fulfilled, (state, action) => {
+        state.statusFetch = "succeeded";
+        state.membersList = action.payload;
+      })
+      .addCase(fetchMembersAsync.rejected, (state, action) => {
+        state.statusFetch = "failed";
+        state.error = action.payload;
+      })
+      .addCase(addMemberAsync.pending, (state) => {
+        state.statusAdd = "loading";
+        state.error = null;
+      })
+      .addCase(addMemberAsync.fulfilled, (state, action) => {
+        state.statusAdd = "succeeded";
+        state.membersList.push(action.payload);
+      })
+      .addCase(addMemberAsync.rejected, (state, action) => {
+        state.statusAdd = "failed";
+        state.error = action.payload;
+      })
+      .addCase(deleteAllMembersAsync.pending, (state) => {
+        state.statusDelete = "loading";
+        state.error = null;
+      })
+      .addCase(deleteAllMembersAsync.fulfilled, (state) => {
+        state.statusDelete = "succeeded";
+        state.membersList = [];
+      })
+      .addCase(deleteAllMembersAsync.rejected, (state, action) => {
+        state.statusDelete = "failed";
+        state.error = action.payload;
+      })
+      .addCase(deleteMemberAsync.pending, (state) => {
+        state.statusDelete = "loading";
+        state.error = null;
+      })
+      .addCase(deleteMemberAsync.fulfilled, (state, action) => {
+        state.statusDelete = "succeeded";
+        state.membersList = state.membersList.filter(
+          (member) => member.id !== action.payload,
+        );
+      })
+      .addCase(deleteMemberAsync.rejected, (state, action) => {
+        state.statusDelete = "failed";
+        state.error = action.payload;
+      })
+      .addCase(updateMemberAsync.pending, (state) => {
+        state.statusUpdate = "loading";
+        state.error = null;
+      })
+      .addCase(updateMemberAsync.fulfilled, (state, action) => {
+        state.statusUpdate = "succeeded";
+        const index = state.membersList.findIndex(
+          (member) => member.id === action.payload.id,
+        );
+        state.membersList[index] = action.payload;
+      })
+      .addCase(updateMemberAsync.rejected, (state, action) => {
+        state.statusUpdate = "failed";
+        state.error = action.payload;
+      });
   },
 });
 
 export default membersSlice.reducer;
-
-export const { add, remove, removeAll, toggleSelect } = membersSlice.actions;

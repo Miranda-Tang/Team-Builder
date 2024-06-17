@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { remove, toggleSelect } from "./membersSlice.js";
+import { deleteMemberAsync, updateMemberAsync } from "./membersSlice.js";
 import { useState } from "react";
 import Modal from "./Modal.jsx";
 import Details from "./Details.jsx";
@@ -19,7 +19,7 @@ const MemberCard = ({ member }) => {
       </div>
       <button
         className="delete-button"
-        onClick={() => dispatch(remove(member.id))}
+        onClick={() => dispatch(deleteMemberAsync(member.id))}
       >
         X
       </button>
@@ -29,7 +29,12 @@ const MemberCard = ({ member }) => {
           <div id="button-container">
             <button
               onClick={() => {
-                dispatch(toggleSelect(member.id));
+                dispatch(
+                  updateMemberAsync({
+                    id: member.id,
+                    updates: { isSelected: true },
+                  }),
+                );
                 setShowModal(false);
               }}
               disabled={member.isSelected}

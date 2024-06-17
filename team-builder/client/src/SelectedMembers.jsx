@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleSelect } from "./membersSlice.js";
+import { updateMemberAsync } from "./membersSlice.js";
 
 const SelectedMembers = () => {
-  const selectedMembers = useSelector((state) => state.members).filter(
-    (member) => member.isSelected,
-  );
+  const selectedMembers = useSelector(
+    (state) => state.members.membersList,
+  ).filter((member) => member.isSelected);
   const dispatch = useDispatch();
 
   return (
@@ -18,7 +18,14 @@ const SelectedMembers = () => {
           />
           <button
             className="deselect-member-button"
-            onClick={() => dispatch(toggleSelect(member.id))}
+            onClick={() =>
+              dispatch(
+                updateMemberAsync({
+                  id: member.id,
+                  updates: { isSelected: false },
+                }),
+              )
+            }
           >
             X
           </button>

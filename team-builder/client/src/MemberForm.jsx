@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { add } from "./membersSlice.js";
+import { addMemberAsync } from "./membersSlice.js";
 
 const InputField = ({ label, id, type, value, onChange, ...rest }) => (
   <>
@@ -53,16 +53,17 @@ const MemberForm = () => {
   const clearForm = () => {
     setFormData(initialFormData);
   };
-  
+
   const addMember = (e) => {
     e.preventDefault();
+
     const newMember = {
-      id: Date.now(),
       isSelected: false,
       ...formData,
     };
 
-    dispatch(add(newMember));
+    dispatch(addMemberAsync(newMember));
+
     clearForm();
   };
 
