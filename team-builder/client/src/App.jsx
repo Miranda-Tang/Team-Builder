@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store.js";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Home from "./Home.jsx";
 import About from "./About.jsx";
