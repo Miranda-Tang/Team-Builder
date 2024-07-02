@@ -125,7 +125,7 @@ const SearchBar = ({ membersList }) => {
               onClick={() => {
                 dispatch(
                   updateMemberAsync({
-                    id: searchedMember.id,
+                    id: searchedMember._id,
                     updates: { isSelected: true },
                   }),
                 );

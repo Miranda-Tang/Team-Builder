@@ -11,7 +11,7 @@ const Details = ({ member }) => {
   const handleSave = () => {
     setSaveStatus("saving");
     dispatch(
-      updateMemberAsync({ id: member.id, updates: { age, description } }),
+      updateMemberAsync({ id: member._id, updates: { age, description } }),
     )
       .unwrap() // The .unwrap() properly differentiates between resolved and rejected actions
       .then(() => {

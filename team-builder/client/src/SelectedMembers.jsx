@@ -5,12 +5,16 @@ const SelectedMembers = () => {
   const selectedMembers = useSelector(
     (state) => state.members.membersList,
   ).filter((member) => member.isSelected);
+
+  if (selectedMembers.length === 4) {
+  }
+
   const dispatch = useDispatch();
 
   return (
     <div className="selected-members">
       {selectedMembers.map((member) => (
-        <div className="avatar-container" key={member.id}>
+        <div className="avatar-container" key={member._id}>
           <img
             className="selected-member-avatar"
             src={member.image}
@@ -21,7 +25,7 @@ const SelectedMembers = () => {
             onClick={() =>
               dispatch(
                 updateMemberAsync({
-                  id: member.id,
+                  id: member._id,
                   updates: { isSelected: false },
                 }),
               )

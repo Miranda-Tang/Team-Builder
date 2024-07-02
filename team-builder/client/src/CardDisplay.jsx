@@ -41,7 +41,7 @@ const CardDisplay = () => {
 
       <ul id="member_list">
         {membersList.map((member) => (
-          <MemberCard member={member} key={member.id} />
+          <MemberCard member={member} key={member._id} />
         ))}
       </ul>
     </div>

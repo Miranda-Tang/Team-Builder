@@ -3,9 +3,15 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
 const membersRouter = require("./routes/members");
+
+mongoose
+  .connect("mongodb://localhost:27017/team-builder")
+  .then(() => console.log("MongoDB connection established successfully"))
+  .catch((error) => console.error("Failed to connect MongoDB:", error.message));
 
 const app = express();
 
