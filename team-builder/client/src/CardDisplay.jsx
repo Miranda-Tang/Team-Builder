@@ -25,7 +25,7 @@ const CardDisplay = () => {
 
   return (
     <div id="card_display">
-      <div id="top-bar">
+      <div className="top-bar">
         <SelectedMembers />
         <div className="right-aligned-components">
           <SearchBar membersList={membersList} />

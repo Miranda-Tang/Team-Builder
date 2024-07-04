@@ -37,7 +37,7 @@ const MemberCard = ({ member }) => {
                 );
                 setShowModal(false);
               }}
-              disabled={member.isSelected}
+              disabled={member.isSelected || member.team}
             >
               Select
             </button>

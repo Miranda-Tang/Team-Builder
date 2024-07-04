@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
 const membersRouter = require("./routes/members");
+const teamsRouter = require("./routes/teams");
 
 mongoose
   .connect("mongodb://localhost:27017/team-builder")
@@ -24,5 +25,6 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/api/members", membersRouter);
+app.use("/api/teams", teamsRouter);
 
 module.exports = app;

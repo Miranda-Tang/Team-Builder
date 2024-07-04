@@ -10,13 +10,8 @@ const TeamSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Member",
-      validate: [arrayLimit, "{PATH} exceeds the limit of 4"],
     },
   ],
 });
-
-function arrayLimit(val) {
-  return val.length <= 4;
-}
 
 module.exports = mongoose.model("Team", TeamSchema);

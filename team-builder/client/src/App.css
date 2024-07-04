@@ -130,11 +130,16 @@ button[disabled] {
     padding-left: calc(var(--main-padding) / 2);
 }
 
-#top-bar {
+.top-bar {
     height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.top-bar.team-formation {
+    justify-content: center;
+    margin-bottom: 25px;
 }
 
 .selected-members {
@@ -313,9 +318,13 @@ ul#member_list li {
     background: #E4E4E4;
 }
 
-.description-input {
+.description-input, .teamName-input {
     margin-top: 10px;
     height: 60px;
+}
+
+.teamName-input {
+    margin-bottom: 25px;
 }
 
 .age-input-container {

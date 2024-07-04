@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateMemberAsync } from "./membersSlice";
 
@@ -6,7 +6,16 @@ const Details = ({ member }) => {
   const [saveStatus, setSaveStatus] = useState("saved");
   const [age, setAge] = useState(member.age);
   const [description, setDescription] = useState(member.description);
+  const [team, setTeam] = useState(member.team);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (member.team) {
+      fetch(`http://localhost:3000/api/teams/${team}`).then((response) =>
+        response.json().then((data) => setTeam(data.name)),
+      );
+    }
+  }, [member]);
 
   const handleSave = () => {
     setSaveStatus("saving");
@@ -28,6 +37,7 @@ const Details = ({ member }) => {
   return (
     <>
       <img id="avatar" src={member.image} alt={member.name} />
+      {member.team && <h2>{team}</h2>}
       <textarea
         className="description-input"
         value={description}
