@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Member = require("../models/Member");
+const Team = require("../models/Team");
 
 /* GET members. */
 router.get("/", async (req, res) => {
@@ -8,6 +9,7 @@ router.get("/", async (req, res) => {
     const members = await Member.find();
     res.json(members);
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });
@@ -22,6 +24,7 @@ router.get("/:name", async (req, res) => {
       res.status(404).json({ message: "Member not found" });
     }
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });
@@ -34,6 +37,7 @@ router.post("/", async (req, res) => {
     const member = await newMember.save();
     res.status(201).json(member);
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });
@@ -42,8 +46,10 @@ router.post("/", async (req, res) => {
 router.delete("/", async (req, res) => {
   try {
     await Member.deleteMany();
+    await Team.deleteMany();
     res.sendStatus(204);
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });
@@ -51,14 +57,16 @@ router.delete("/", async (req, res) => {
 /* DELETE individual member. */
 router.delete("/:id", async (req, res) => {
   try {
-    const member = await Member.findByIdAndDelete(req.params.id);
+    const member = await Member.findById(req.params.id);
 
     if (member) {
+      await member.deleteOne();
       res.sendStatus(204);
     } else {
       res.status(404).json({ message: "Member not found" });
     }
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });
@@ -78,6 +86,7 @@ router.patch("/:id", async function (req, res) {
       res.status(404).json({ message: "Member not found" });
     }
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });

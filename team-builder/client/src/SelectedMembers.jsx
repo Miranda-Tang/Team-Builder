@@ -30,7 +30,7 @@ const SelectedMembers = () => {
     }
   }, [selectedMembers]);
 
-  const handleClose = (event, reason) => {
+  const handleClose = () => {
     setShowSnackbar(false);
   };
 
@@ -75,11 +75,11 @@ const SelectedMembers = () => {
       </div>
 
       <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         open={showSnackbar}
         autoHideDuration={5000}
         onClose={handleClose}
-        message="You can only select 4 members for your team."
+        message="You can only select 4 members for your team!"
       />
 
       {showModal && (

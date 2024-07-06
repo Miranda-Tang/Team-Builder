@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Member = require("../models/Member");
+const Team = require("../models/Team");
 
 mongoose
   .connect("mongodb://localhost:27017/team-builder")
@@ -35,8 +36,9 @@ let initMembers = [
 
 const seedDatabase = async () => {
   try {
-    await Member.deleteMany({});
+    await Member.deleteMany();
     await Member.insertMany(initMembers);
+    await Team.deleteMany();
     console.log("Database seeded successfully");
   } catch (error) {
     console.error("Failed to seed database: ", error);

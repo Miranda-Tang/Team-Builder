@@ -131,7 +131,7 @@ const SearchBar = ({ membersList }) => {
                 );
                 setShowModal(false);
               }}
-              disabled={searchedMember.isSelected}
+              disabled={searchedMember.isSelected || searchedMember.team}
             >
               Select
             </button>

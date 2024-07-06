@@ -10,6 +10,7 @@ router.post("/", async (req, res) => {
     const team = await newTeam.save();
     res.status(201).json(team);
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });
@@ -24,6 +25,7 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "Team not found" });
     }
   } catch (err) {
+    console.error(err);
     res.sendStatus(500);
   }
 });

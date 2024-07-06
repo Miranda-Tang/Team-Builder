@@ -66,7 +66,7 @@ const TeamFormation = ({ members }) => {
         </div>
       </div>
 
-      <label htmlFor="age-input">Team Name:</label>
+      <label htmlFor="teamName-input">Team Name:</label>
       <input
         className="teamName-input"
         name="teamName-input"
