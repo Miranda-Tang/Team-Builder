@@ -1,0 +1,16 @@
+{
+  "name": "455-team-builder",
+  "version": "1.0.0",
+  "description": "Use this repo for your CPSC 455 assignments!",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd server && npm install",
+    "start-server": "cd server && npm run dev",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run dev"
+  },
+  "keywords": [],
+  "author": "Miranda Tang",
+  "license": "ISC"
+}
