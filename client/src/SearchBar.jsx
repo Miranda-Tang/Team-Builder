@@ -61,7 +61,9 @@ const SearchBar = ({ membersList }) => {
 
   const searchMember = async (name) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/members/${name}`);
+      const response = await fetch(
+        `https://four55-team-builder.onrender.com/api/members/${name}`,
+      );
 
       if (!response.ok) {
         throw new Error(response.statusText);

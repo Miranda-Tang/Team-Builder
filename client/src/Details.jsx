@@ -11,9 +11,9 @@ const Details = ({ member }) => {
 
   useEffect(() => {
     if (member.team) {
-      fetch(`http://localhost:3000/api/teams/${member.team}`).then((response) =>
-        response.json().then((data) => setTeam(data.name)),
-      );
+      fetch(
+        `https://four55-team-builder.onrender.com/api/teams/${member.team}`,
+      ).then((response) => response.json().then((data) => setTeam(data.name)));
     }
   }, [member.team]);
 
