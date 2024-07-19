@@ -10,19 +10,16 @@ const TeamFormation = ({ members }) => {
   const handleSave = async () => {
     setSaveStatus("saving");
     try {
-      const teamResponse = await fetch(
-        "https://four55-team-builder.onrender.com/api/teams",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: teamName,
-            members: members.map((member) => member._id),
-          }),
+      const teamResponse = await fetch(`${process.env.HOST}/api/teams`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          name: teamName,
+          members: members.map((member) => member._id),
+        }),
+      });
 
       if (!teamResponse.ok) {
         throw new Error(teamResponse.statusText);
