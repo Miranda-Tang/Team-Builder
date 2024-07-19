@@ -18,6 +18,10 @@ mongoose
   .then(() => console.log("MongoDB connection established successfully"))
   .catch((error) => console.error("Failed to connect MongoDB:", error.message));
 
+const corsOptions = {
+  origin: `${process.env.FRONTEND_URL}`,
+};
+
 const app = express();
 
 app.use(logger("dev"));
@@ -25,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use("/", indexRouter);
 app.use("/api/members", membersRouter);

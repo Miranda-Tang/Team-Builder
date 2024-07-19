@@ -10,16 +10,19 @@ const TeamFormation = ({ members }) => {
   const handleSave = async () => {
     setSaveStatus("saving");
     try {
-      const teamResponse = await fetch(`${process.env.SERVER_HOST}/api/teams`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const teamResponse = await fetch(
+        "https://team-builder-miranda.onrender.com/api/teams",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: teamName,
+            members: members.map((member) => member._id),
+          }),
         },
-        body: JSON.stringify({
-          name: teamName,
-          members: members.map((member) => member._id),
-        }),
-      });
+      );
 
       if (!teamResponse.ok) {
         throw new Error(teamResponse.statusText);

@@ -62,7 +62,7 @@ const SearchBar = ({ membersList }) => {
   const searchMember = async (name) => {
     try {
       const response = await fetch(
-        `${process.env.SERVER_HOST}/api/members/${name}`,
+        `https://team-builder-miranda.onrender.com/api/members/${name}`,
       );
 
       if (!response.ok) {
