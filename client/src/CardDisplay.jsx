@@ -25,7 +25,7 @@ const CardDisplay = () => {
 
   return (
     <div id="card_display">
-      <div id="top-bar">
+      <div className="top-bar">
         <SelectedMembers />
         <div className="right-aligned-components">
           <SearchBar membersList={membersList} />
@@ -41,7 +41,7 @@ const CardDisplay = () => {
 
       <ul id="member_list">
         {membersList.map((member) => (
-          <MemberCard member={member} key={member.id} />
+          <MemberCard member={member} key={member._id} />
         ))}
       </ul>
     </div>

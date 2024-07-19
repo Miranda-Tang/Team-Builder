@@ -19,7 +19,7 @@ const MemberCard = ({ member }) => {
       </div>
       <button
         className="delete-button"
-        onClick={() => dispatch(deleteMemberAsync(member.id))}
+        onClick={() => dispatch(deleteMemberAsync(member._id))}
       >
         X
       </button>
@@ -31,13 +31,13 @@ const MemberCard = ({ member }) => {
               onClick={() => {
                 dispatch(
                   updateMemberAsync({
-                    id: member.id,
+                    id: member._id,
                     updates: { isSelected: true },
                   }),
                 );
                 setShowModal(false);
               }}
-              disabled={member.isSelected}
+              disabled={member.isSelected || member.team}
             >
               Select
             </button>

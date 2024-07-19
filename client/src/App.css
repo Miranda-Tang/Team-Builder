@@ -6,6 +6,7 @@
     --form-bg-color: #ffffff;
     --input-border-color: #eee;
     --button-bg-color: #008CBA;
+    --dark-bg-color: #005880;
     --alter-color: #333;
     --main-padding: 20px;
     --mobile-padding: 10px;
@@ -20,12 +21,16 @@ body {
 }
 
 header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: var(--header-height);
     background-color: var(--alter-color);
     color: #fff;
     padding: var(--main-padding);
     text-align: center;
     border-bottom: 5px solid var(--button-bg-color);
+    font-size: large;
     font-weight: bold;
     font-family: var(--header-font), sans-serif;
 }
@@ -98,6 +103,11 @@ button:hover {
     opacity: 0.8;
 }
 
+button[disabled] {
+    background-color: #B9B9B9;
+    cursor: not-allowed;
+}
+
 #member_form {
     flex: 1;
     display: flex;
@@ -120,10 +130,104 @@ button:hover {
     padding-left: calc(var(--main-padding) / 2);
 }
 
-#delete-button-container {
+.top-bar {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar.team-formation {
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.selected-members {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.selected-member-avatar,
+.deselect-member-button {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid var(--dark-bg-color);
+}
+
+.deselect-member-button {
+    background: transparent;
+    color: var(--dark-bg-color);
+    font-size: 24px;
+    opacity: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.avatar-container:hover .selected-member-avatar {
+    opacity: 0.2;
+}
+
+.avatar-container:hover .deselect-member-button {
+    opacity: 1;
+}
+
+.right-aligned-components {
     display: flex;
     justify-content: flex-end;
-    padding-right: var(--main-padding);
+}
+
+.autocomplete-dropdown-container {
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    left: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 5;
+}
+
+.suggestion-button {
+    background-color: white;
+    color: var(--button-bg-color);
+    border: 1px solid var(--button-bg-color);
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+    margin: 0
+}
+
+.suggestion-button:hover {
+    background-color: #f1f1f1;
 }
 
 .delete-button {
@@ -141,8 +245,8 @@ button:hover {
 }
 
 .delete-button:hover {
-    color: #005880;
-    border-color: #005880;
+    color: var(--dark-bg-color);
+    border-color: var(--dark-bg-color);
 }
 
 #form_error_message {
@@ -154,6 +258,9 @@ button:hover {
 }
 
 ul#member_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--main-padding);
     padding: 0;
     list-style-type: none;
 }
@@ -163,7 +270,6 @@ ul#member_list li {
     background-color: #E4E4E4;
     border-radius: 5px;
     padding: var(--main-padding);
-    margin-bottom: calc(var(--main-padding) / 2);
     border: 1px solid #B9B9B9;
     display: flex;
     justify-content: space-between;
@@ -171,14 +277,96 @@ ul#member_list li {
 }
 
 .member-image,
-.member-details {
+.member-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .member-image img {
     height: 100%;
     width: auto;
     object-fit: cover;
+}
+
+#modal {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal:empty {
+    display: none;
+}
+
+#modal > div {
+    overflow-y: auto;
+    height: 300px;
+    width: 400px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 30px;
+    background: #E4E4E4;
+}
+
+.description-input, .teamName-input {
+    margin-top: 10px;
+    height: 60px;
+}
+
+.teamName-input {
+    margin-bottom: 25px;
+}
+
+.age-input-container {
+    display: flex;
+    width: 100%;
+    max-width: 150px;
+    margin: 15px auto 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.age-input {
+    width: 80px;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+}
+
+@keyframes saving {
+    0% {
+        transform: scale(1);
+        background-color: var(--dark-bg-color);
+        color: white;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.save-changes-button.saving {
+    animation: saving 1s ease;
+}
+
+#avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid var(--dark-bg-color);
 }
 
 #about_container {
@@ -215,7 +403,7 @@ ul#member_list li {
 }
 
 #contacts a:hover, #course_link:hover {
-    color: #005880;
+    color: var(--dark-bg-color);
 }
 
 #course_container {
@@ -246,9 +434,22 @@ ul#member_list li {
         padding: var(--mobile-padding);
     }
 
+    ul#member_list {
+        display: block;
+        grid-template-columns: none;
+    }
+
     ul#member_list li, #introduction_container {
         flex-direction: column;
         height: auto;
+    }
+
+    #modal > div {
+        width: 85%;
+    }
+
+    ul#member_list li {
+        margin-bottom: calc(var(--main-padding) / 2);
     }
 
     #introduction_text {
@@ -266,7 +467,6 @@ ul#member_list li {
     form,
     input,
     textarea {
-        margin: var(--mobile-padding);
         padding: var(--mobile-padding);
     }
 

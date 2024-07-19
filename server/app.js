@@ -3,9 +3,18 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
 const membersRouter = require("./routes/members");
+const teamsRouter = require("./routes/teams");
+
+mongoose
+  .connect(
+    "mongodb+srv://LuckyDime:FakePassword@455-team-builder.wcdt3nm.mongodb.net/team-builder?retryWrites=true&w=majority&appName=455-team-builder",
+  )
+  .then(() => console.log("MongoDB connection established successfully"))
+  .catch((error) => console.error("Failed to connect MongoDB:", error.message));
 
 const app = express();
 
@@ -18,5 +27,6 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/api/members", membersRouter);
+app.use("/api/teams", teamsRouter);
 
 module.exports = app;

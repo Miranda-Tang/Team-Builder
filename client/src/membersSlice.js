@@ -156,7 +156,7 @@ const membersSlice = createSlice({
       .addCase(deleteMemberAsync.fulfilled, (state, action) => {
         state.statusDelete = "succeeded";
         state.membersList = state.membersList.filter(
-          (member) => member.id !== action.payload,
+          (member) => member._id !== action.payload,
         );
       })
       .addCase(deleteMemberAsync.rejected, (state, action) => {
@@ -170,7 +170,7 @@ const membersSlice = createSlice({
       .addCase(updateMemberAsync.fulfilled, (state, action) => {
         state.statusUpdate = "succeeded";
         const index = state.membersList.findIndex(
-          (member) => member.id === action.payload.id,
+          (member) => member._id === action.payload._id,
         );
         state.membersList[index] = action.payload;
       })
