@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const MEMBERS_URL = `${process.env.HOST}/api/members`;
+const MEMBERS_URL = `${process.env.SERVER_HOST}/api/members`;
 
 export const fetchMembersAsync = createAsyncThunk(
   "members/fetchMembersAsync",

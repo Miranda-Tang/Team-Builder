@@ -11,8 +11,8 @@ const Details = ({ member }) => {
 
   useEffect(() => {
     if (member.team) {
-      fetch(`${process.env.HOST}/api/teams/${member.team}`).then((response) =>
-        response.json().then((data) => setTeam(data.name)),
+      fetch(`${process.env.SERVER_HOST}/api/teams/${member.team}`).then(
+        (response) => response.json().then((data) => setTeam(data.name)),
       );
     }
   }, [member.team]);

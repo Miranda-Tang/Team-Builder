@@ -10,7 +10,7 @@ const TeamFormation = ({ members }) => {
   const handleSave = async () => {
     setSaveStatus("saving");
     try {
-      const teamResponse = await fetch(`${process.env.HOST}/api/teams`, {
+      const teamResponse = await fetch(`${process.env.SERVER_HOST}/api/teams`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

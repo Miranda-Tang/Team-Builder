@@ -61,7 +61,9 @@ const SearchBar = ({ membersList }) => {
 
   const searchMember = async (name) => {
     try {
-      const response = await fetch(`${process.env.HOST}/api/members/${name}`);
+      const response = await fetch(
+        `${process.env.SERVER_HOST}/api/members/${name}`,
+      );
 
       if (!response.ok) {
         throw new Error(response.statusText);
