@@ -11,12 +11,17 @@ const teamsRouter = require("./routes/teams");
 
 require("dotenv").config();
 
-mongoose
-  .connect(
-    `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@455-team-builder.wcdt3nm.mongodb.net/team-builder?retryWrites=true&w=majority&appName=455-team-builder`,
-  )
-  .then(() => console.log("MongoDB connection established successfully"))
-  .catch((error) => console.error("Failed to connect MongoDB:", error.message));
+// Only connect to MongoDB if not in test environment
+if (process.env.NODE_ENV !== "test") {
+  mongoose
+    .connect(
+      `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@455-team-builder.wcdt3nm.mongodb.net/team-builder?retryWrites=true&w=majority&appName=455-team-builder`,
+    )
+    .then(() => console.log("MongoDB connection established successfully"))
+    .catch((error) =>
+      console.error("Failed to connect MongoDB:", error.message),
+    );
+}
 
 const corsOptions = {
   origin: `${process.env.FRONTEND_URL}`,
