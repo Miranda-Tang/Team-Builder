@@ -11,7 +11,7 @@ const TeamFormation = ({ members }) => {
     setSaveStatus("saving");
     try {
       const teamResponse = await fetch(
-        "https://four55-team-builder.onrender.com/api/teams",
+        "https://team-builder-miranda.onrender.com/api/teams",
         {
           method: "POST",
           headers: {

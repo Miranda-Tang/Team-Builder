@@ -2,9 +2,11 @@ const mongoose = require("mongoose");
 const Member = require("../models/Member");
 const Team = require("../models/Team");
 
+require("dotenv").config();
+
 mongoose
   .connect(
-    "mongodb+srv://LuckyDime:FakePassword@455-team-builder.wcdt3nm.mongodb.net/team-builder?retryWrites=true&w=majority&appName=455-team-builder",
+    `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@455-team-builder.wcdt3nm.mongodb.net/team-builder?retryWrites=true&w=majority&appName=455-team-builder`,
   )
   .then(() => console.log("MongoDB connection established successfully"))
   .catch((error) => console.error("Failed to connect MongoDB:", error.message));

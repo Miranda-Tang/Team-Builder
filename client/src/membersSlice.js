@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const MEMBERS_URL = "https://four55-team-builder.onrender.com/api/members";
+const MEMBERS_URL = "https://team-builder-miranda.onrender.com/api/members";
 
 export const fetchMembersAsync = createAsyncThunk(
   "members/fetchMembersAsync",
