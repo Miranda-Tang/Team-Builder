@@ -83,7 +83,7 @@ describe("MemberCard", () => {
     renderWithRedux(<MemberCard member={member} />, { initialState });
     screen.getByText("X").click();
     await vi.waitFor(() =>
-      expect(membersSlice.deleteMemberAsync).toHaveBeenCalledTimes(1),
+      expect(membersSlice.deleteMemberAsync).toHaveBeenCalledWith("1"),
     );
   });
 });

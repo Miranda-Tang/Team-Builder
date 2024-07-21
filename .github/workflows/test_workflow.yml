@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Run Tests Workflow
 
 on:
   pull_request:
@@ -9,10 +9,12 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Use Node.js
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
