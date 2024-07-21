@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import membersReducer, * as membersSlice from "../src/membersSlice";
 import CardDisplay from "../src/CardDisplay";
-import React from "react"; // tells the test runner to mock the membersSlice module
+import React from "react";
 
 // tells the test runner to mock the membersSlice module
 vi.mock("../src/membersSlice", () => ({
