@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { deleteMemberAsync, updateMemberAsync } from "./membersSlice.js";
-import { useState } from "react";
+import React, { useState } from "react";
 import Modal from "./Modal.jsx";
 import Details from "./Details.jsx";
 

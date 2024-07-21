@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "dev": "NODE_ENV=dev nodemon ./bin/www",
+    "test": "NODE_ENV=test jest",
+    "test:coverage": "NODE_ENV=test jest --coverage"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
