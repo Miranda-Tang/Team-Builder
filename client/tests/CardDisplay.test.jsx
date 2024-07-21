@@ -2,9 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import membersReducer from "../src/membersSlice";
+import membersReducer, * as membersSlice from "../src/membersSlice";
 import CardDisplay from "../src/CardDisplay";
-import React from "react";
+import React from "react"; // tells the test runner to mock the membersSlice module
 
 // tells the test runner to mock the membersSlice module
 vi.mock("../src/membersSlice", () => ({
@@ -104,6 +104,7 @@ describe("CardDisplay", () => {
     };
     renderWithRedux(<CardDisplay />, { initialState });
     await waitFor(() => {
+      expect(membersSlice.fetchMembersAsync).toHaveBeenCalled();
       const memberCards = screen.getAllByRole("listitem");
       expect(memberCards.length).toBe(2);
     });
