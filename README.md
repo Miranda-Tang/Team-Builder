@@ -1,3 +1,3 @@
-# CPSC 455 Assignment Repositories
+# Miranda's Team Builder
 
-Use this repo for your CPSC 455 assignments!
+💡 [Give it a try](https://mirandas-team-builder.onrender.com/) yourself!
